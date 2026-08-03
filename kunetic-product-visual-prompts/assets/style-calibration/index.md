@@ -4,6 +4,7 @@
 > They are visual calibration references only. They may guide composition, hierarchy, camera distance, scene treatment, typography and annotation style.
 > They must not be treated as evidence of KUNETIC product appearance, specifications, certifications, customer projects, factory capability, internal layout or technical functions.
 > Before using a reference, open the actual image. Do not claim to have reviewed an image from its filename alone.
+> For one image task, normally select only 1–3 references from the closest category. Use a cross-category reference only when it contributes a clearly different design element.
 
 ## Category use
 
