@@ -1,40 +1,55 @@
-# Ian Xiaohei Illustrations
+# KUNETIC Product Visual Prompts
 
-> 把中文文章里的判断、流程、状态和隐喻，变成一张张白底、手绘、怪诞但清爽的正文配图。
+> 读取 KUNETIC Product Lab 的指定产品目录，把已批准的产品事实、页面文案、Layout 和图片框架，转化为一套可直接交给外部生图工具使用的产品页视觉方案与完整提示词。
 >
-> 16:9 横版 | 小黑 IP | 纯白手绘 | 少量红橙蓝中文批注 | Codex Skill
+> 产品真实性 | B2B 工业视觉 | iPhone 6s 真实场景 | 工程可视化 | 只输出提示词
 
 ---
 
 ## 这个仓库是什么
 
-Ian Xiaohei Illustrations 是一个 Codex Skill，用来指导 AI Agent 为中文文章、帖子、博客、Notion 文档和方法论内容生成正文配图。
+这是从 [Ian Xiaohei Illustrations](https://github.com/helloianneo/ian-xiaohei-illustrations) Fork 并改造的 Codex Skill。
 
-它不是通用插画 prompt，也不是 PPT 信息图模板。它的核心目标是：先理解文章里的认知锚点，再把其中一个判断、流程、结构、状态或隐喻，变成一张有记忆点的 16:9 手绘解释图。
+它保留原版最有价值的工作逻辑：
 
-默认视觉 IP 是“小黑”：一个黑色实心、白点眼、细腿、空表情的小角色。小黑不是吉祥物，不是贴纸，也不是站在角落里的装饰物，而是正在认真参与系统运转的荒诞工作者。
+```text
+读取内容 → 提炼视觉重点 → 选择构图 → 输出 Shot List → 输出单张方案 → QA
+```
 
-一句话：**让 AI 不只是“配一张图”，而是把文章里的一个关键认知动作画出来。**
+但任务域改为 KUNETIC 产品详情页：
+
+```text
+读取指定 Product Lab 产品目录
+→ 理解事实、文案、Layout 和图片框架
+→ 设计整套产品页视觉
+→ 输出完整生图提示词
+```
+
+本 Skill 不生成图片，不修改 Product Lab，不上传媒体，也不发布产品。
+
+第一版只支持产品页，Blog 配图后续再扩展。
 
 ---
 
-## 适合谁用
+## Product Lab 与本 Skill 的分工
 
-特别适合：
+Product Lab 决定：
 
-- 写中文文章，需要正文配图和文章插图的人
-- 做知识型内容、方法论内容、AI 工作流内容的人
-- 想把抽象判断画成具体隐喻的人
-- 想要一种比 PPT 信息图更轻、更怪、更有个人识别度的配图风格的人
-- 用 Codex 做内容生产，希望稳定复用一套视觉语言的人
+- 需要多少张图；
+- 放在哪个页面区块；
+- 比例和尺寸；
+- 每张图解决什么问题；
+- 必须表达的事实；
+- 禁止内容、文件名和 Alt。
 
-不适合：
+本 Skill 决定：
 
-- 想要商业插画、品牌 KV 或精致扁平插画的人
-- 想要传统 PPT 信息图、复杂架构图或流程图的人
-- 想要儿童卡通、可爱 IP、表情包风格的人
-- 想把大量正文、长段解释或完整课程页塞进一张图里的人
-- 需要严格可编辑矢量源文件的人
+- 使用哪种视觉模式；
+- 产品角度和镜头；
+- 构图、场景和光线；
+- 标签、工程线条和信息层级；
+- 如何避免整组图片重复；
+- 每张图的完整提示词。
 
 ---
 
@@ -42,128 +57,86 @@ Ian Xiaohei Illustrations 是一个 Codex Skill，用来指导 AI Agent 为中�
 
 默认输出：
 
-- 16:9 横版正文配图
-- 一篇文章的 4-8 张 shot list
-- 每张图的主题、核心意思、结构类型、小黑动作和中文标注建议
-- 最终 PNG 图片，保存到 workspace 的 `assets/<article-slug>-illustrations/`
+- 资料完整性与硬约束摘要；
+- 整体视觉策略；
+- 与 Product Lab 完全对应的 Shot List；
+- 每张图片的完整生图提示词；
+- 可选优化建议；
+- QA 检查结果。
 
 默认不输出：
 
-- PPTX / PDF / Keynote
-- SVG / HTML / Canvas 可编辑图
-- 商业海报或封面 KV
-- 大段文字型信息图
+- 最终图片；
+- 图片编辑；
+- Payload Media；
+- Product Lab 内容修改；
+- 发布操作；
+- Blog 配图。
 
 ---
 
-## 视觉风格
+## 视觉模式
 
-这个 skill 默认使用 Ian 的“小黑怪诞正文配图”风格：
+- 产品商业摄影；
+- 真实应用场景；
+- 工程系统可视化；
+- 功能概念表达；
+- 部署与尺度；
+- 多场景应用拼贴；
+- 工厂与 OEM / ODM 能力。
 
-- 纯白背景，不要纸纹、米色、阴影、渐变
-- 黑色手绘线稿，细线，轻微抖动
-- 大量留白，主体只占画面约 40%-60%
-- 少量红色、橙色、蓝色中文手写批注
-- 一张图只表达一个核心动作、结构、状态或隐喻
-- 小黑必须参与核心动作，不能只是装饰
-- 怪诞、有创意、清爽，但不幼稚、不卖萌
+凡涉及真实项目、安装、仓库、运输、应用或工厂场景，提示词统一以：
 
----
+```text
+一张由iphone6s随意拍摄的真实照片……
+```
 
-## 示例效果
+作为摄影风格基础。
 
-### 两个断点
-
-![两个断点](examples/images/01-two-breakpoints.png)
-
-### 按目的分拣
-
-![按目的分拣](examples/images/02-sort-by-purpose.png)
-
-### 一鱼多吃
-
-![一鱼多吃](examples/images/03-one-fish-many-uses.png)
-
-### 承接路径
-
-![承接路径](examples/images/04-handoff-path.png)
-
-### 信息井
-
-![信息井](examples/images/05-information-well.png)
-
-### 想法压机
-
-![想法压机](examples/images/06-idea-press.png)
-
-### 内容发酵
-
-![内容发酵](examples/images/07-content-fermentation.png)
-
-### 信任桥
-
-![信任桥](examples/images/08-trust-bridge.png)
-
-这些图片是风格校准样例，不是构图模板。使用时应该从当前文章重新发明隐喻，不要照抄旧案例的物件和构图。
+图片新增文字统一为极简无衬线字体、现代工业风，可使用藏蓝、KUNETIC 品牌蓝、品牌红、深灰和白色克制搭配。
 
 ---
 
 ## 安装
 
-克隆仓库：
+克隆 Fork：
 
 ```bash
-git clone https://github.com/helloianneo/ian-xiaohei-illustrations.git
+git clone https://github.com/yz0851/ian-xiaohei-illustrations.git
 cd ian-xiaohei-illustrations
 ```
 
-复制 skill 到 Codex skills 目录：
+复制新 Skill 到 Codex skills 目录：
 
 ```bash
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
-cp -R ./ian-xiaohei-illustrations "${CODEX_HOME:-$HOME/.codex}/skills/"
-```
-
-安装后，在 Codex 里使用：
-
-```text
-Use $ian-xiaohei-illustrations 为这篇中文文章设计并生成 5 张小黑怪诞正文配图。
+cp -R ./kunetic-product-visual-prompts "${CODEX_HOME:-$HOME/.codex}/skills/"
 ```
 
 ---
 
 ## 怎么用
 
+### 完整产品页提示词包
+
+```text
+Use $kunetic-product-visual-prompts
+
+请读取：
+yz0851/kunetic-product-lab
+products/YYYY-M-D-{stable-product-id}/
+
+根据已批准的事实、文案、Layout 和图片框架，
+设计整套产品页配图并输出全部完整提示词。
+不要生成图片。
+```
+
 ### 只做配图规划
 
 ```text
-Use $ian-xiaohei-illustrations 先不要生图。
-请分析下面这篇文章哪里值得配图，输出 5 张左右的 shot list。
-每张图写清楚：放在哪段后、主题、核心意思、结构类型、小黑在做什么、建议中文标注词。
-
-<粘贴文章>
-```
-
-### 直接生成正文配图
-
-```text
-Use $ian-xiaohei-illustrations 把下面这篇文章生成 4 张小黑怪诞正文配图。
-要求：16:9 横版、纯白背景、黑色手绘线稿、少量红橙蓝中文手写批注。
-
-<粘贴文章>
-```
-
-### 为单个概念生成一张图
-
-```text
-Use $ian-xiaohei-illustrations 为“信任不是喊出来的，而是一块证据一块证据铺过去”生成一张正文配图。
-画面要怪诞但清爽，小黑必须承担核心动作。
-```
-
-### 去掉图里的标题或错误文字
-
-```text
-Use $ian-xiaohei-illustrations 帮我编辑这张图，去掉左上角的“流程图”标题，其他内容保持不变。
+Use $kunetic-product-visual-prompts
+读取指定产品目录，先只输出整体视觉策略和 Shot List，
+不要写完整提示词，不要生成图片。
 ```
 
 更多示例见 [examples/prompts.md](examples/prompts.md)。
@@ -172,17 +145,14 @@ Use $ian-xiaohei-illustrations 帮我编辑这张图，去掉左上角的“流�
 
 ## 工作流程
 
-这个 skill 的流程是：
-
-1. 读取文章、Markdown、Notion 内容、截图或用户给的主题
-2. 提炼核心观点、认知转折、流程结构和适合视觉化的段落
-3. 先输出 shot list：每张图只选一个认知锚点
-4. 为每张图选择结构类型：Workflow、系统局部、前后对比、角色状态、概念隐喻、方法分层、地图路线或小漫画分镜
-5. 重新发明一个低科技、怪诞但成立的物理隐喻
-6. 让小黑承担核心动作
-7. 每张图单独调用图像模型生成
-8. 按 QA checklist 检查：白底、留白、小黑动作、中文标注、非 PPT 感、非旧案例复刻
-9. 保存最终 PNG，并报告用途和路径
+1. 用户明确指定 Product Lab 产品目录；
+2. 分层读取状态、图片框架、Layout、文案和事实边界；
+3. 按具体图片任务读取相关产品参考；
+4. 形成与 Product Lab 对应的 Shot List；
+5. 为每张图选择一个主要视觉模式；
+6. 输出完整可复制提示词；
+7. 按 QA 检查产品真实性、技术边界和反重复；
+8. 停止，不调用图像模型。
 
 ---
 
@@ -193,89 +163,35 @@ Use $ian-xiaohei-illustrations 帮我编辑这张图，去掉左上角的“流�
 ├── README.md
 ├── LICENSE
 ├── NOTICE.md
-├── assets/
-│   └── ian-wechat-qr.jpg
 ├── examples/
-│   ├── images/
-│   │   ├── 01-two-breakpoints.png
-│   │   ├── 02-sort-by-purpose.png
-│   │   └── ...
 │   └── prompts.md
+├── kunetic-product-visual-prompts/
+│   ├── SKILL.md
+│   ├── agents/
+│   │   └── openai.yaml
+│   └── references/
+│       ├── product-lab-input-contract.md
+│       ├── style-dna.md
+│       ├── product-fidelity.md
+│       ├── composition-patterns.md
+│       ├── prompt-template.md
+│       └── qa-checklist.md
 └── ian-xiaohei-illustrations/
-    ├── SKILL.md
-    ├── agents/
-    │   └── openai.yaml
-    ├── assets/
-    │   └── examples/
-    └── references/
-        ├── style-dna.md
-        ├── xiaohei-ip.md
-        ├── composition-patterns.md
-        ├── prompt-template.md
-        └── qa-checklist.md
+    └── ... upstream skill retained for reference
 ```
 
-真正需要安装到 Codex 的是子目录：
+真正安装的是：
 
 ```text
-ian-xiaohei-illustrations/
+kunetic-product-visual-prompts/
 ```
 
-根目录的 README、LICENSE、NOTICE 和 examples 是 GitHub 分享文档。
+原版 Skill 文件保留在 Fork 中作为上游参考，不进入新 Skill 的默认读取路径。
 
 ---
 
-## 注意事项
+## 来源与许可
 
-- 图片里的中文文字越短越稳定。
-- 每张图只讲一个核心结构，不要把文章做成说明书。
-- 小黑必须承担核心动作；如果去掉小黑画面仍然完全成立，说明小黑太装饰了。
-- 示例图只用于校准线条密度、留白、颜色克制和小黑参与方式，不要复刻构图。
-- AI 图像模型可能出现错字、幻觉标签、风格漂移或多余标题，生成后需要检查。
-- 如果中文错字严重，优先减少标注词并重生成。
+本项目基于 Ian 的 [Ian Xiaohei Illustrations](https://github.com/helloianneo/ian-xiaohei-illustrations) 改造，保留了原版的 Skill 组织方式与“先理解内容再设计视觉”的工作流骨架。
 
----
-
-## 相关项目
-
-- [Ian Handdrawn PPT](https://github.com/helloianneo/ian-handdrawn-ppt) — 中文手绘技术 PPT-style 页面图生成 Skill
-- [Awesome Claude Code Skills](https://github.com/helloianneo/awesome-claude-code-skills) — Claude Code Skills / Agents / Plugins 精选合集
-- [Obsidian + Claude AI Second Brain](https://github.com/helloianneo/obsidian-ai-second-brain) — Obsidian + Claude AI 个人知识库搭建指南
-
----
-
-## 关于作者
-
-**Ian (伊恩)** — 产品设计师 / 一人公司实践者 / AI Builder
-
-用 AI 团队打造一人公司。
-
-- GitHub: [helloianneo](https://github.com/helloianneo)
-- X/Twitter: [@ianneo_ai](https://x.com/ianneo_ai)
-- 网站: [www.ianneo.xyz](https://www.ianneo.xyz)
-- 微信: `ianneoxyz`
-- 邮箱: hello.neoc@gmail.com
-
----
-
-## 继续探索
-
-这套小黑配图 Skill，只是我用 AI 搭建个人生产系统里的一个小工具。
-
-如果你也在用 AI 做内容、知识库、工作流或产品化，可以继续看我的网站：[www.ianneo.xyz](https://www.ianneo.xyz)。
-
-只想先观察，可以关注我的 [X/Twitter](https://x.com/ianneo_ai)。
-
-想了解 Indie Builders Club，加微信：`ianneoxyz`，备注「OPC」。
-
-<p>
-  <img src="assets/ian-wechat-qr.jpg" alt="Ian 微信二维码" width="120">
-</p>
-
-不方便扫码也可以搜索微信：`ianneoxyz`。
-
----
-
-## License
-
-MIT License. See [LICENSE](LICENSE).
+原项目使用 MIT License。详见 [LICENSE](LICENSE) 和 [NOTICE.md](NOTICE.md)。
