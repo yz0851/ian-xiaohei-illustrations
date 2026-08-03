@@ -1,83 +1,81 @@
 # Prompt Examples
 
-下面这些 prompt 可以直接复制到 Codex 里使用。
+下面的指令可以直接复制到 Codex 中使用。
 
-## 只做配图规划
+## 完整产品页提示词包
 
 ```text
-Use $ian-xiaohei-illustrations 先不要生图。
-请分析下面这篇文章哪里值得配图，输出 5 张左右的 shot list。
-每张图写清楚：
-- 放在哪个段落后
-- 图的主题
-- 核心意思
-- 结构类型
-- 小黑在图里做什么
-- 建议元素
-- 建议中文标注词
+Use $kunetic-product-visual-prompts
 
-<粘贴文章>
+请读取：
+yz0851/kunetic-product-lab
+products/YYYY-M-D-{stable-product-id}/
+
+根据已批准的事实、文案、Layout 和图片框架，
+设计整套产品页配图并输出全部完整提示词。
+不要生成图片，不要修改 Product Lab。
 ```
 
-## 文章正文配图
+## 只输出 Shot List
 
 ```text
-Use $ian-xiaohei-illustrations 把下面这篇文章生成 4 张小黑怪诞正文配图。
-要求：16:9 横版、纯白背景、黑色手绘线稿、少量红橙蓝中文手写批注。
-每张图只讲一个核心结构，不要做 PPT 信息图，不要可爱卡通。
+Use $kunetic-product-visual-prompts
+读取指定产品目录，先只输出：
+- Product Lab 硬约束摘要
+- 整体视觉策略
+- Shot List
 
-<粘贴文章>
+暂时不要写完整提示词，不要生成图片。
 ```
 
-## 长文配图策略
+## 重新设计某一张 Hero
 
 ```text
-Use $ian-xiaohei-illustrations 给这篇长文做配图策略。
-不要平均配图，只挑认知锚点：核心判断、输入输出闭环、前后对比、常见坑、承接路径。
-默认 6-8 张，先输出 shot list，不要生成图片。
-
-<粘贴文章>
+Use $kunetic-product-visual-prompts
+读取指定产品目录和现有图片框架。
+只重新设计 Hero 04 的视觉方案与完整提示词，
+保持页面位置、比例、基本职责、事实和文件名不变。
 ```
 
-## 单个观点生成一张图
+## 真实应用场景图
 
 ```text
-Use $ian-xiaohei-illustrations 为这个观点生成一张 16:9 正文配图：
-
-信任不是喊出来的，而是一块证据一块证据铺过去。
-
-画面要怪诞但清爽，小黑必须承担核心动作。
-中文标注最多 5 个，短一点。
+Use $kunetic-product-visual-prompts
+读取指定产品目录，为 Applications 区块设计一张真实应用场景图。
+场景摄影语言必须以“一张由iphone6s随意拍摄的真实照片……”开头，
+但具体构图、人物、产品视角和环境由你根据页面内容设计。
+只输出提示词。
 ```
 
-## 工作流主题
+## 系统架构图
 
 ```text
-Use $ian-xiaohei-illustrations 为“把一条原始素材加工成流量、信任、转化三种内容”生成一张图。
-不要画正式流程图，不要复刻一鱼多吃旧案例。
-请重新发明一个新的低科技隐喻，让小黑参与核心动作。
+Use $kunetic-product-visual-prompts
+读取指定产品目录，为系统集成区块设计一张工程可视化图。
+严格核对 PV、Grid、Load、Generator、EV 和产品之间的真实连接关系，
+区分标准配置、外部设备和 Optional，不得自行增加功能。
 ```
 
-## 改图：去掉标题
+## 工厂与 OEM / ODM 图
 
 ```text
-Use $ian-xiaohei-illustrations 帮我编辑这张图。
-去掉左上角的“Workflow / 流程图”标题和下划线，其他内容保持不变。
-不要新增任何文字或物件。
+Use $kunetic-product-visual-prompts
+读取指定产品目录，为 OEM / ODM 区块设计一张工厂能力图。
+使用“一张由iphone6s随意拍摄的真实照片……”的普通手机现场风格，
+配合已批准页面文案，不虚构工厂面积、产能、机器人产线或认证实验室。
 ```
 
-## 改图：增强小黑参与感
+## 检查现有提示词
 
 ```text
-Use $ian-xiaohei-illustrations 这张图方向对，但小黑有点像装饰。
-请保持核心意思不变，重生成一版：让小黑成为真正推动结构运转的人。
-画面更怪一点，但仍然纯白、清爽、少字。
-```
+Use $kunetic-product-visual-prompts
+读取指定产品目录，并检查下面这组产品图提示词是否：
+- 符合 Product Lab 图片数量和职责
+- 保持真实产品结构
+- 没有参数或内部结构幻觉
+- 构图不重复
+- 字体与品牌色统一
+- 真实场景符合 iPhone 6s 普通手机现场感
 
-## 生成一组风格样片
-
-```text
-Use $ian-xiaohei-illustrations 输出 5 个不同主题的小黑正文配图效果。
-主题分别覆盖：信息过载、产品验证、内容复利、一人公司、信任建立。
-每张单独生成，不要拼成一张。
+只输出问题、修改建议和修订后的提示词，不生成图片。
 ```
