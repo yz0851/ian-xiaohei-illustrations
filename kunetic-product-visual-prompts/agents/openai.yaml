@@ -1,0 +1,6 @@
+interface:
+  display_name: "KUNETIC 产品视觉提示词"
+  short_description: "读取指定 Product Lab 产品目录，设计产品页配图并输出完整提示词"
+  default_prompt: "Use $kunetic-product-visual-prompts 读取我指定的 KUNETIC Product Lab 产品目录，根据已批准的事实、文案、Layout 和图片框架设计整套产品页视觉方案并输出完整提示词。只输出提示词，不生成图片。"
+policy:
+  allow_implicit_invocation: false
