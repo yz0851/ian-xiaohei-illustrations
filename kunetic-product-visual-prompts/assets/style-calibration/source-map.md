@@ -1,5 +1,9 @@
 # Style Calibration Source Map
 
+> This file records local-source provenance and upload mapping only.
+> Duplicate source images intentionally appear in more than one category when they serve different visual purposes.
+> Local Windows paths are retained for internal audit and must not be used as runtime paths by the Skill.
+
 | Category | Original Local Path | GitHub Target Path | Status |
 |---|---|---|---|
 | Product Hero | D:\0-外贸\product-content-sheet-v1\media\kunetic-241kwh-outdoor-all-in-one-bess.webp | product-hero/hero-reference-01.webp | Uploaded |
